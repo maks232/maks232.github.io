@@ -1,6 +1,8 @@
 # 📇 Maksim Bock
 *Software Developer based in Berlin, Germany*
 
+* * *
+
 ## 👨‍💻 Job Experience
 **Software Engineer** @ [IAV](https://iav.com/) (Nov 2018 - Oct 2020)  
 HMI/UI-Developer for On Screen Keyboard in car infotainment system
