@@ -1,6 +1,10 @@
 theme: jekyll-theme-minimal
 title: maks232
-description: >
-  👨‍💼 🚴 🏃‍♂️ 👨‍🍳 🍺 🛶 🏓 ⛰️ 🚶‍♂️ 💻
-  📧 maksim.bock@gmail.com
+description: 👨‍💼 🚴 🏃‍♂️ 👨‍🍳 🍺 🛶 🏓 ⛰️ 🚶‍♂️ 💻
+social-twitter: # add your Twitter handle
+social-facebook: # add your Facebook handle
+social-github: artemsheludko # add your Github handle
+social-linkedin: # add your Linkedin handle
+social-email: maksim.bock@gmail.com
+
 logo: https://secure.gravatar.com/avatar/092f956a3dac40441f35863e7c333d5a?s=200
