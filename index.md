@@ -9,7 +9,7 @@ HMI/UI-Developer for On Screen Keyboard in car infotainment system
 * EB Guide  
 * Python
 * process planning
-* coordinator for subdivision 
+* team coordination
 
 **Fullstack Webdeveloper** @ [Charité CFM](https://cfm-charite.de/home/) (Dec 2015 - Sep 2018)  
 Development of customized apps for Business Intelligence Team
