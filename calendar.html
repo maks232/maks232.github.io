@@ -52,7 +52,7 @@
       <label for="columns">Anzahl Zeilen:</label>
       <input id="columns" type="number" onchange="calculate()" value="10" />
       <br />
-      <button onclick="print()">drucken</button>
+      <button onclick="window.print()">drucken</button>
     </div>
     <div class="headerbar">
       <h1 id="title"></h1>
@@ -94,10 +94,6 @@ function calculate() {
   document.getElementById("title").innerHTML = title + " (" + moment(selectedDate).format('dddd') + ")";
 
 }
-
-  function print() {
-    window.print();
-  }
 
   function tableCreate(columns, rows) {
     var container = document.getElementById('body');
