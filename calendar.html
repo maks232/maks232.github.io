@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+
+    <style>
+      .grid {
+        display: flex; /* <--- required */
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+      }
+
+      .column {
+        flex: 1; /* <--- required (style column to fill the same space as the other columns) */
+      }
+
+      .row {
+        padding-top: 10px;
+        border: 1px solid;
+        text-align: center;
+        height: 50px;
+      }
+
+      @media print {
+        @page {
+          size: landscape;
+        }
+        .setup {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="setup">
+      <label for="title">Titel:</label>
+      <input id="title-in" type="text" />
+      <br />
+      <label for="date">Startdatum:</label>
+      <input id="date" type="date" onchange="handleSelectedDate(event);" />
+      <br />
+      <label for="weeks">Anzahl Wochen:</label>
+      <input id="weeks" type="number" onchange="calculate()" value="8" />
+      <br />
+      <label for="columns">Anzahl Zeilen:</label>
+      <input id="columns" type="number" onchange="calculate()" value="10" />
+      <br />
+      <button onchange="print()">drucken</button>
+    </div>
+    <div class="headerbar">
+      <h1 id="title"></h1>
+      <h1 id="weekday"></h1>
+    </div>
+    <div id="body">
+      <div id="test"></div>
+    </div>
+  </body>
+
+  <script>
+    window.onload = function () {
+  document.getElementById('date').value = moment().format('YYYY-MM-DD');
+};
+
+function handleSelectedDate(event) {
+  calculate();
+}
+
+function calculate() {
+  let selectedDate = document.getElementById('date').value;
+  let weeks = Number(document.getElementById('weeks').value);
+  let columns = Number(document.getElementById('columns').value);
+  let title = document.getElementById('title-in').value;
+
+  moment.locale('de')
+  
+  let calculatedDates = Array(weeks).fill().map((_, i) => { return  moment(selectedDate).add(i+1, 'weeks').format('DD.MM.YYYY')});
+
+/*
+  getHolidays().then((response) => {
+    response.text().then(holidays => console.log(holidays));
+
+    tableCreate(calculatedDates, columns, holidays);
+    });
+*/
+
+  tableCreate(calculatedDates, columns);  
+  document.getElementById("title").innerHTML = title + " (" + moment(selectedDate).format('dddd') + ")";
+
+}
+
+  function print() {
+    window.print();
+  }
+
+  function tableCreate(columns, rows) {
+    var container = document.getElementById('body');
+    var grid = document.createElement('div');
+    container.innerHTML = "";
+      grid.className = 'grid';
+      for (var c = 0; c < columns.length; ++c) {
+          var column = document.createElement('div'); // create column
+          column.className = 'column';
+          for (var r = 0; r < rows; ++r) {
+              var row = document.createElement('div'); // create row
+              row.className = 'row';
+              if (r === 0) {
+                row.textContent = columns[c]; // set text
+              } else {
+                row.textContent = " ";
+              }
+              column.appendChild(row); // append row in column
+          }
+          grid.appendChild(column); // append column inside grid
+      }
+      container.appendChild(grid);
+  }
+  </script>
+
+</html>
