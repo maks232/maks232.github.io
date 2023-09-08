@@ -15,6 +15,14 @@
         flex: 1; /* <--- required (style column to fill the same space as the other columns) */
       }
 
+      .title {
+        padding-top: 10px;
+        border: 1px solid;
+        text-align: center;
+        height: 29px;
+        font-weight: bold;
+      }
+
       .row {
         padding-top: 10px;
         border: 1px solid;
@@ -24,7 +32,6 @@
       
       div {
         font-size: large;
-        font-weight: bold;
       }
 
       @media print {
@@ -107,7 +114,7 @@ function calculate() {
               var row = document.createElement('div'); // create row
               
               if (r === 0) {
-                row.className = "title"
+                row.className = 'title'
                 row.textContent = columns[c]; // set text
               } else {
                 row.className = 'row';
