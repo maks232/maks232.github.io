@@ -105,10 +105,12 @@ function calculate() {
           column.className = 'column';
           for (var r = 0; r < rows; ++r) {
               var row = document.createElement('div'); // create row
-              row.className = 'row';
+              
               if (r === 0) {
+                row.className = "title"
                 row.textContent = columns[c]; // set text
               } else {
+                row.className = 'row';
                 row.textContent = " ";
               }
               column.appendChild(row); // append row in column
