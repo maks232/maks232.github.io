@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	
+	<title>OData Date Formats</title>
+	
+    <script id='sap-ui-bootstrap' type='text/javascript' 
+        src='https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js'
+          data-sap-ui-theme='sap_bluecrystal'
+        data-sap-ui-libs='sap.m'
+        >
+  
+    </script> 
+	
+	
+	<script>
+      
+      
+            var oList = new sap.m.List({
+                
+            });
+ 
+            var itemTemplate = new sap.m.StandardListItem({
+                title : "{Name}"
+            });
+      
+      
+      
+      
+      
+      
+      
+// Create App      
+var app = new sap.m.App();
+//  Create Dummy data          				
+           
+//  Create Model
+
+      var sUrl = "https://cors-anywhere.herokuapp.com/http://services.odata.org/V2/OData/OData.svc/";
+	var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+    
+	sap.ui.getCore().setModel(oModel);
+      
+    	              
+      // Create Aggregation Binding
+      //oListStandardNoImageNoHeader.setModel(oModel);
+      oList.bindAggregation("items","/Categories",itemTemplate);
+      
+      
+			var page1 = new sap.m.Page("page1", {
+				title:"Customer Data",
+                content : [oList]
+                
+			});
+						
+			app.addPage(page1);
+
+			app.placeAt("body");
+		
+      
+      
+      
+      
+      
+ 	</script>
+	</head>
+	<body class='sapUiBody'>
+		<div id='body'></div>
+	</body>
+</html>
