@@ -220,6 +220,41 @@
                 beeinflussen.</b
               >
             </div>
+            <h3
+              onclick="toggleCollapse(this)"
+              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
+            >
+              ▼ Für unsere gemeinsame Zukunft
+            </h3>
+            <div
+              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
+            >
+              Wähle nicht aus negativen Gefühlen wie Angst, Egoismus oder Missgunst, sondern aus positiven 
+              wie Mitgefühl, Verantwortung und dem Wunsch nach Teilhabe. Wahlen sind zwar nur ein kleines, 
+              aber sehr wichtiges Werkzeug, um unsere Gesellschaft zu gestalten. Und wer will schon eine 
+              Gemeinschaft, die ihre Kraft vor allem aus dem Negativen zieht?
+            </div>
+            <h3
+              onclick="toggleCollapse(this)"
+              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
+            >
+              ▼ Deine Stimme ist über 8000€ im Jahr Wert
+            </h3>
+            <div
+              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
+            >
+              Und was ist mit der Partei, die diese eine Sache falsch macht?
+              Sie macht wahrscheinlich trotzdem vieles andere richtig.
+              Eine Wahl ist kein Weihnachtsgeschenk, bei dem Du genau das 
+              bekommst, was Du Dir wünschst. Sie ist eher wie eine Party, zu 
+              der jeder etwas zum Buffet beisteuert. Du kannst Dich darüber 
+              beschweren, dass niemand Dein Lieblingsgericht mitgebracht hat 
+              – oder Du suchst Dir einfach etwas Leckeres aus.
+
+              <br /><br /><b
+                >Um im Bild des vorherigen Absatzes zu bleiben: Meide die Gerichte der wütenden Köche – sie sind schwer bekömmlich.
+              </b>
+            </div>
           </div>
         </div>
       </div>
@@ -299,6 +334,21 @@ Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die Sitzverteilung 
         ></div>
       </div>
     </div>
+
+    <p>Besucher: <span id="visitor-count">Loading...</span></p>
+
+<script>
+    fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("visitor-count").textContent = data.count || "0";
+        })
+        .catch(error => {
+            console.error("Error fetching visitor count:", error);
+            document.getElementById("visitor-count").textContent = "Error";
+        });
+</script>
+
 
     <script>
       function toggleVoter(element) {
