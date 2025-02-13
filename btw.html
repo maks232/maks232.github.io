@@ -6,6 +6,11 @@
     <title>
       Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
     </title>
+    <meta name="description" content="Ein interaktiver Wähler-Simulator der zeigt, warum jede Stimme zählt. Verstehen Sie die Auswirkungen von Nichtwählern auf das demokratische System.">
+    <meta property="og:title" content="Warum Du wählen solltest">
+    <meta property="og:description" content="Ein interaktiver Wähler-Simulator der zeigt, warum jede Stimme zählt.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maks232.github.io/btw.html">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script>
       // Initialize all sections as collapsed when the page loads
@@ -175,6 +180,7 @@
         background-size: 10px 10px;
       }
     </style>
+    <link rel="icon" type="image/png" href="favicon.png">
   </head>
   <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-4 sm:py-8 max-w-3xl">
@@ -302,12 +308,10 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
-      <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
         Wähler-Simulator
-      </h3>
-      <p
-        class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base"
-      >
+      </h2>
+      <p class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
         Wenn die Hälfte der Wahlberechtigten nicht wählt, bedeutet das, dass
         die Stimmen der Wähler doppelt so viel zählen – auch die derer, die Du
         auf keinen Fall unterstützen würdest. <br /><br />
@@ -414,11 +418,17 @@
 
     <script>
       fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById("visitor-count").innerText = " " + data.visit_count;
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
         })
-        .catch(error => console.error("Error fetching counter:", error));
+        .then(data => {
+          document.getElementById("visitor-count").innerText = " " + (data.visit_count || "0");
+        })
+        .catch(error => {
+          console.error("Error fetching counter:", error);
+          document.getElementById("visitor-count").innerText = " --";
+        });
     </script>
 
     <script>
@@ -510,25 +520,4 @@
         // Update text
         document.getElementById("resultText").innerHTML =
           `😊: ${totalSmile} Stimmen - ${Math.round(exactSeats.smile)} Sitze<br>` +
-          `😎: ${totalRainbow} Stimmen - ${Math.round(exactSeats.rainbow)} Sitze<br>` +
-          `🙃: ${totalUpsidedown} Stimmen - ${Math.round(exactSeats.upsidedown)} Sitze<br>` +
-          `💩: ${totalAfD} Stimmen - ${Math.round(exactSeats.afd)} Sitze`;
-      }
-
-      // Initialize results
-      updateResults();
-
-      function toggleCollapse(element) {
-        const section = element.parentElement;
-        section.classList.toggle("collapsed");
-
-        // Toggle arrow icon
-        if (section.classList.contains("collapsed")) {
-          element.textContent = element.textContent.replace("▼", "▶");
-        } else {
-          element.textContent = element.textContent.replace("▶", "▼");
-        }
-      }
-    </script>
-  </body>
-</html>
+          `
