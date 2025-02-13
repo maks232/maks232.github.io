@@ -44,14 +44,11 @@
         justify-content: center;
         cursor: pointer;
         font-size: 30px;
+        transition: transform 0.2s ease-in-out;
       }
 
-      .seats-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 20px;
+      .voter:hover {
+        transform: scale(1.1);
       }
 
       .seat {
@@ -61,6 +58,12 @@
         align-items: center;
         justify-content: center;
         font-size: 30px;
+        transition: transform 0.2s ease-in-out;
+        animation: seatAppear 0.3s ease-out forwards;
+      }
+
+      .seat:hover {
+        transform: scale(1.05);
       }
 
       .split-seat {
@@ -77,11 +80,18 @@
 
       .collapsible-section {
         cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .collapsible-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       }
 
       .collapsible-section h3 {
         cursor: pointer;
         user-select: none;
+        transition: color 0.2s ease;
       }
 
       .collapsible-section h3:hover {
@@ -146,6 +156,23 @@
           height: 40px;
         }
       }
+
+      @keyframes seatAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      body {
+        background-color: #f3f4f6;
+        background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+        background-size: 10px 10px;
+      }
     </style>
   </head>
   <body class="bg-gray-50">
@@ -209,12 +236,7 @@
             <div
               class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
             >
-              Deutschland verfügt über ein enormes Budget – und Du trägst Deinen
-              Teil dazu bei. Durch Deine Einkäufe, Dein Einkommen und Deine
-              gesellschaftliche Teilhabe fließt Geld in dieses System.
-              Runtergebrochen auf Deine Stimme sind das über 30.000 € für die
-              nächste Regierung. Wäre es nicht klüger, aktiv mitzubestimmen,
-              anstatt anderen die Entscheidung darüber zu überlassen?
+            Deutschland verfügt über ein enormes Budget – und du trägst deinen Teil dazu bei. Durch deine Einkäufe, dein Einkommen und deine gesellschaftliche Teilhabe fließt Geld in dieses System. Runtergebrochen auf deine Stimme sind das über 30.000 € für die nächste Regierung. Wenn du einer Bekannten oder einem Bekannten eine solche Summe in die Hand drücken würdest, hättest du doch vermutlich auch das Bedürfnis, dich ab und zu zu erkundigen, wie es denn so läuft.
               <br /><br /><b
                 >Du hast jetzt die Chance, dieses Budget ein wenig zu
                 beeinflussen.</b
@@ -289,8 +311,14 @@ Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die Sitzverteilung 
           class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8"
         >
           <!-- Fixed voters for each party -->
-          <div class="voter text-3xl sm:text-4xl cursor-pointer smile">😊</div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer smile">😊</div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer smile"
+               role="button"
+               tabindex="0"
+               aria-label="Democratic party voter 1">😊</div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer smile"
+               role="button"
+               tabindex="0"
+               aria-label="Democratic party voter 2">😊</div>
           <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
             😎
           </div>
@@ -305,6 +333,9 @@ Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die Sitzverteilung 
           <div
             class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
             onclick="toggleVoter(this)"
+            role="button"
+            tabindex="0"
+            aria-label="Toggle non-voter participation"
           >
             🟩
           </div>
@@ -344,17 +375,27 @@ Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die Sitzverteilung 
       </div>
     </div>
 
-    <p>Besucher: <span id="visitor-count">Loading...</span></p>
+    <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mt-4 text-center">
+        <p class="text-gray-600">
+            <span class="font-semibold">Besucher:</span> 
+            <span id="visitor-count" class="text-gray-800 font-bold">Loading...</span>
+        </p>
+    </div>
 
 <script>
     fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             document.getElementById("visitor-count").textContent = data.count || "0";
         })
         .catch(error => {
             console.error("Error fetching visitor count:", error);
-            document.getElementById("visitor-count").textContent = "Error";
+            document.getElementById("visitor-count").textContent = "---";
         });
 </script>
 
