@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Initialize all sections as collapsed when the page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add("content-loaded");
+        document.querySelectorAll(".collapsible-section").forEach((section) => {
+          section.classList.add("collapsed");
+          const h3 = section.querySelector("h3");
+          h3.textContent = h3.textContent.replace("▼", "▶");
+        });
+      });
+    </script>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        max-width: 800px;
+        margin: 50px auto;
+        font-family: Arial, sans-serif;
+      }
+
+      .voters-section,
+      .results-section {
+        text-align: center;
+        width: 100%;
+        margin: 20px 0;
+      }
+
+      .voter {
+        width: 35px;
+        height: 35px;
+        margin: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 30px;
+      }
+
+      .seats-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .seat {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+      }
+
+      .split-seat {
+        position: relative;
+      }
+
+      .split-seat div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .collapsible-section {
+        cursor: pointer;
+      }
+
+      .collapsible-section h3 {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .collapsible-section h3:hover {
+        color: #666;
+      }
+
+      .content {
+        max-height: 1000px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      .collapsed .content {
+        max-height: 0;
+      }
+
+      .collapsed h3 {
+        color: #666;
+      }
+
+      .collapsed h3::first-letter {
+        display: inline-block;
+        transform: rotate(-90deg);
+      }
+
+      .explanation {
+        margin: 20px auto;
+        max-width: 600px;
+        line-height: 1.4;
+        color: #444;
+      }
+
+      /* Add initial collapsed state */
+      .collapsible-section {
+        cursor: pointer;
+      }
+      .collapsible-section .content {
+        display: none;
+      }
+      .collapsible-section.collapsed .content {
+        display: none;
+      }
+      /* Once DOM is loaded, switch to animated transitions */
+      .content-loaded .collapsible-section .content {
+        display: block;
+        max-height: 1000px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      .content-loaded .collapsible-section.collapsed .content {
+        max-height: 0;
+      }
+
+      @media (min-width: 640px) {
+        .voter {
+          width: 40px;
+          height: 40px;
+          margin: 5px;
+        }
+        .seat {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-4 sm:py-8 max-w-3xl">
+      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
+        <h2
+          class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center leading-tight"
+        >
+          Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen
+          willst
+        </h2>
+
+        <div class="space-y-3 sm:space-y-4">
+          <div
+            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
+          >
+            <h3
+              onclick="toggleCollapse(this)"
+              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
+            >
+              ▼ Hohe Wahlbeteiligung bedeutet echte Demokratie.
+            </h3>
+            <div
+              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
+            >
+              Mehr Wähler ➡️ faire Entscheidungen<br />
+              Wenige Wähler ➡️ Mehr Macht für rechte Randgruppen
+              <br /><br /><b>Sei Fair und wähle.</b>
+            </div>
+          </div>
+
+          <div
+            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
+          >
+            <h3
+              onclick="toggleCollapse(this)"
+              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
+            >
+              ▼ 😊😊😊😒 1 von 4 darf noch nicht einmal wählen
+            </h3>
+            <div
+              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
+            >
+              Viele Menschen in Deutschland dürfen noch nicht einmal
+              mitentscheiden, obwohl ihr tägliches Leben von Entscheidungen
+              beeinflusst wird. Sie zahlen Steuern, bereichern unsere
+              Gesellschaft, aber haben keine Stimme.
+              <br /><br /><b>Nutze Dein Privileg.</b>
+            </div>
+          </div>
+
+          <div
+            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
+          >
+            <h3
+              onclick="toggleCollapse(this)"
+              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
+            >
+              ▼ Deine Stimme ist über 8000€ im Jahr Wert
+            </h3>
+            <div
+              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
+            >
+              Deutschland hat viel Geld zur Verfügung. Du bist Teil dieses
+              Budgets, durch Deine Einkäufe, Dein Einkommen und Deine Teilhabe
+              an unserer Gesellschaft. <br />Auf Deine Stimme runtergebrochen
+              sind das mehr als 30.000€ für die nächste Regierung. Wäre doch
+              schade, einfach unbedacht dieses Budget einfach liegen zu lassen
+              und andere darüber entscheiden zu lassen. <br /><br /><b
+                >Du hast jetzt die Chance, dieses Budget ein wenig zu
+                beeinflussen.</b
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+          Wähler-Simulator
+        </h3>
+        <p
+          class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base"
+        >
+          Wenn die hälfte der Wahlberechtigten nicht wählt, heißt das, die
+          Stimmen der Wähler doppelt so viel Wert haben. Auch derer, die Du auf
+          keinen Fall wählen würdest. In diesem Beispiel hast Du 4 Wähler, die
+          irgendwelche Parteien Gewählt haben, nur nicht die 💩-Partei.
+          Dummerweise hat aber die 💩-Partei 2 Sitze bekommen. Du wirst sehen,
+          wenn nur 2 der 5 Nichtwähler sich überwinden und wählen, wird die
+          💩-Partei nur 1 Sitz kriegen.
+          <br /><br />
+          Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die
+          Sitzverteilung ändert, wenn Nichtwähler ihre Stimme den demokratischen
+          Parteien geben würden.
+        </p>
+
+        <div
+          id="votersContainer"
+          class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8"
+        >
+          <!-- Fixed voters for each party -->
+          <div class="voter text-3xl sm:text-4xl cursor-pointer smile">😊</div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer smile">😊</div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+            😎
+          </div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+            😎
+          </div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer upsidedown">
+            🙃
+          </div>
+          <div class="voter text-3xl sm:text-4xl cursor-pointer brown">💩</div>
+          <!-- Toggleable non-voters -->
+          <div
+            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+            onclick="toggleVoter(this)"
+          >
+            🟩
+          </div>
+          <div
+            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+            onclick="toggleVoter(this)"
+          >
+            🟩
+          </div>
+          <div
+            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+            onclick="toggleVoter(this)"
+          >
+            🟩
+          </div>
+          <div
+            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+            onclick="toggleVoter(this)"
+          >
+            🟩
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
+          Ergebnisse (10 Sitze)
+        </h2>
+        <div
+          id="seatsContainer"
+          class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      function toggleVoter(element) {
+        if (element.classList.contains("nonvoter")) {
+          element.classList.remove("nonvoter");
+          // Randomly assign new voters to one of the democratic parties
+          const parties = ["smile", "rainbow", "upsidedown"];
+          const randomParty =
+            parties[Math.floor(Math.random() * parties.length)];
+          element.classList.add(randomParty);
+          element.innerHTML =
+            randomParty === "smile"
+              ? "😊"
+              : randomParty === "rainbow"
+              ? "😎"
+              : "🙃";
+        } else {
+          element.classList.remove("smile", "rainbow", "upsidedown");
+          element.classList.add("nonvoter");
+          element.innerHTML = "🟩";
+        }
+        updateResults();
+      }
+
+      function updateResults() {
+        const totalSmile = document.querySelectorAll(".smile").length;
+        const totalRainbow = document.querySelectorAll(".rainbow").length;
+        const totalUpsidedown = document.querySelectorAll(".upsidedown").length;
+        const totalAfD = document.querySelectorAll(".brown").length;
+        const totalVoters =
+          totalSmile + totalRainbow + totalUpsidedown + totalAfD;
+
+        const seatsContainer = document.getElementById("seatsContainer");
+        seatsContainer.innerHTML = "";
+
+        // Calculate seats for each party
+        const exactSeats = {
+          smile: (totalSmile / totalVoters) * 10,
+          rainbow: (totalRainbow / totalVoters) * 10,
+          upsidedown: (totalUpsidedown / totalVoters) * 10,
+          afd: (totalAfD / totalVoters) * 10,
+        };
+
+        // Add full seats for each party
+        const fullSeats = {
+          smile: Math.floor(exactSeats.smile),
+          rainbow: Math.floor(exactSeats.rainbow),
+          upsidedown: Math.floor(exactSeats.upsidedown),
+          afd: Math.floor(exactSeats.afd),
+        };
+
+        // Add full seats
+        for (let i = 0; i < fullSeats.smile; i++)
+          seatsContainer.innerHTML += `<div class="seat">😊</div>`;
+        for (let i = 0; i < fullSeats.rainbow; i++)
+          seatsContainer.innerHTML += `<div class="seat">😎</div>`;
+        for (let i = 0; i < fullSeats.upsidedown; i++)
+          seatsContainer.innerHTML += `<div class="seat">🙃</div>`;
+        for (let i = 0; i < fullSeats.afd; i++)
+          seatsContainer.innerHTML += `<div class="seat">💩</div>`;
+
+        // Distribute remaining seats based on highest decimal remainder
+        const remainders = {
+          smile: exactSeats.smile - fullSeats.smile,
+          rainbow: exactSeats.rainbow - fullSeats.rainbow,
+          upsidedown: exactSeats.upsidedown - fullSeats.upsidedown,
+          afd: exactSeats.afd - fullSeats.afd,
+        };
+
+        const remainingSeats =
+          10 - Object.values(fullSeats).reduce((a, b) => a + b, 0);
+        const sortedRemainders = Object.entries(remainders)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, remainingSeats);
+
+        sortedRemainders.forEach(([party]) => {
+          const emoji =
+            party === "smile"
+              ? "😊"
+              : party === "rainbow"
+              ? "😎"
+              : party === "upsidedown"
+              ? "🙃"
+              : "💩";
+          seatsContainer.innerHTML += `<div class="seat">${emoji}</div>`;
+        });
+
+        // Update text
+        document.getElementById("resultText").innerHTML =
+          `😊: ${Math.round(exactSeats.smile)} Sitze<br>` +
+          `😎: ${Math.round(exactSeats.rainbow)} Sitze<br>` +
+          `🙃: ${Math.round(exactSeats.upsidedown)} Sitze<br>` +
+          `💩: ${Math.round(exactSeats.afd)} Sitze`;
+      }
+
+      // Initialize results
+      updateResults();
+
+      function toggleCollapse(element) {
+        const section = element.parentElement;
+        section.classList.toggle("collapsed");
+
+        // Toggle arrow icon
+        if (section.classList.contains("collapsed")) {
+          element.textContent = element.textContent.replace("▼", "▶");
+        } else {
+          element.textContent = element.textContent.replace("▶", "▼");
+        }
+      }
+    </script>
+  </body>
+</html>
