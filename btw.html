@@ -6,7 +6,7 @@
     <title>
       Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
     </title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script>
       // Initialize all sections as collapsed when the page loads
       document.addEventListener("DOMContentLoaded", function () {
@@ -299,109 +299,108 @@
           </div>
         </div>
       </div>
-    <div class="container mx-auto px-4 py-4 sm:py-8 max-w-3xl">
+    </div>
 
-      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
-          Wähler-Simulator
-        </h3>
-        <p
-          class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base"
-        >
-          Wenn die Hälfte der Wahlberechtigten nicht wählt, bedeutet das, dass
-          die Stimmen der Wähler doppelt so viel zählen – auch die derer, die Du
-          auf keinen Fall unterstützen würdest. <br /><br />
+    <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
+      <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+        Wähler-Simulator
+      </h3>
+      <p
+        class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base"
+      >
+        Wenn die Hälfte der Wahlberechtigten nicht wählt, bedeutet das, dass
+        die Stimmen der Wähler doppelt so viel zählen – auch die derer, die Du
+        auf keinen Fall unterstützen würdest. <br /><br />
 
-          Stell Dir vor, es gibt 10 Wahlberechtigte: 5 wählen verschiedene
-          Parteien, aber nicht die 💩-Partei. Eine Person wählt die 💩-Partei.
-          Die anderen 4 bleiben zu Hause, obwohl sie diese Partei niemals wählen
-          würden. <br /><br />
+        Stell Dir vor, es gibt 10 Wahlberechtigte: 5 wählen verschiedene
+        Parteien, aber nicht die 💩-Partei. Eine Person wählt die 💩-Partei.
+        Die anderen 4 bleiben zu Hause, obwohl sie diese Partei niemals wählen
+        würden. <br /><br />
 
-          Da die Nichtwähler nicht gezählt werden, erhält die 💩-Partei 2 Sitze
-          statt nur 1. Doch schon wenn nur einer der vier Nichtwähler seine
-          Stimme abgibt, reduziert sich ihr Einfluss. Deine Stimme kann den
-          Unterschied machen! <br /><br />
+        Da die Nichtwähler nicht gezählt werden, erhält die 💩-Partei 2 Sitze
+        statt nur 1. Doch schon wenn nur einer der vier Nichtwähler seine
+        Stimme abgibt, reduziert sich ihr Einfluss. Deine Stimme kann den
+        Unterschied machen! <br /><br />
 
-          Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die
-          Sitzverteilung ändert, wenn Nichtwähler ihre Stimme den demokratischen
-          Parteien geben würden.
-        </p>
+        Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die
+        Sitzverteilung ändert, wenn Nichtwähler ihre Stimme den demokratischen
+        Parteien geben würden.
+      </p>
 
+      <div
+        id="votersContainer"
+        class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8"
+      >
+        <!-- Fixed voters for each party -->
         <div
-          id="votersContainer"
-          class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8"
+          class="voter text-3xl sm:text-4xl cursor-pointer smile"
+          role="button"
+          tabindex="0"
+          aria-label="Democratic party voter 1"
         >
-          <!-- Fixed voters for each party -->
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer smile"
-            role="button"
-            tabindex="0"
-            aria-label="Democratic party voter 1"
-          >
-            😊
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer smile"
-            role="button"
-            tabindex="0"
-            aria-label="Democratic party voter 2"
-          >
-            😊
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
-            😎
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
-            😎
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer upsidedown">
-            🙃
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer brown">💩</div>
-          <!-- Toggleable non-voters -->
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-            role="button"
-            tabindex="0"
-            aria-label="Toggle non-voter participation"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
-          </div>
+          😊
+        </div>
+        <div
+          class="voter text-3xl sm:text-4xl cursor-pointer smile"
+          role="button"
+          tabindex="0"
+          aria-label="Democratic party voter 2"
+        >
+          😊
+        </div>
+        <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+          😎
+        </div>
+        <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+          😎
+        </div>
+        <div class="voter text-3xl sm:text-4xl cursor-pointer upsidedown">
+          🙃
+        </div>
+        <div class="voter text-3xl sm:text-4xl cursor-pointer brown">💩</div>
+        <!-- Toggleable non-voters -->
+        <div
+          class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+          onclick="toggleVoter(this)"
+          role="button"
+          tabindex="0"
+          aria-label="Toggle non-voter participation"
+        >
+          🟩
+        </div>
+        <div
+          class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+          onclick="toggleVoter(this)"
+        >
+          🟩
+        </div>
+        <div
+          class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+          onclick="toggleVoter(this)"
+        >
+          🟩
+        </div>
+        <div
+          class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+          onclick="toggleVoter(this)"
+        >
+          🟩
         </div>
       </div>
+    </div>
 
-      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
-          Ergebnisse (10 Sitze)
-        </h2>
-        <div
-          id="seatsContainer"
-          class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
-        ></div>
-        <div
-          id="resultText"
-          class="text-gray-600 mb-4 sm:mb-6 flex flex-col items-center"
-        ></div>
-      </div>
+    <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
+        Ergebnisse (10 Sitze)
+      </h2>
+      <div
+        id="seatsContainer"
+        class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+      ></div>
+      <div
+        id="resultText"
+        class="text-gray-600 mb-4 sm:mb-6 flex flex-col items-center"
+      ></div>
     </div>
 
     <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mt-4 text-center">
@@ -414,13 +413,13 @@
     </div>
 
     <script>
-  fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("visitor-count").innerText = " " + data.visit_count;
-    })
-    .catch(error => console.error("Error fetching counter:", error));
-</script>
+      fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("visitor-count").innerText = " " + data.visit_count;
+        })
+        .catch(error => console.error("Error fetching counter:", error));
+    </script>
 
     <script>
       function toggleVoter(element) {
