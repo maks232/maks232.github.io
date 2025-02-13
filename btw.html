@@ -466,76 +466,74 @@
         const totalRainbow = document.querySelectorAll(".rainbow").length;
         const totalUpsidedown = document.querySelectorAll(".upsidedown").length;
         const totalAfD = document.querySelectorAll(".brown").length;
-        const totalVoters =
-          totalSmile + totalRainbow + totalUpsidedown + totalAfD;
+        const totalVoters = totalSmile + totalRainbow + totalUpsidedown + totalAfD;
+        const TOTAL_SEATS = 10;
 
         const seatsContainer = document.getElementById("seatsContainer");
         seatsContainer.innerHTML = "";
 
-        // Calculate seats for each party
+        // Calculate exact proportions
         const exactSeats = {
-          smile: (totalSmile / totalVoters) * 10,
-          rainbow: (totalRainbow / totalVoters) * 10,
-          upsidedown: (totalUpsidedown / totalVoters) * 10,
-          afd: (totalAfD / totalVoters) * 10,
+          smile: (totalSmile / totalVoters) * TOTAL_SEATS,
+          rainbow: (totalRainbow / totalVoters) * TOTAL_SEATS,
+          upsidedown: (totalUpsidedown / totalVoters) * TOTAL_SEATS,
+          afd: (totalAfD / totalVoters) * TOTAL_SEATS,
         };
 
-        // Add full seats for each party
-        const fullSeats = {
+        // First pass: Assign floor values
+        const allocatedSeats = {
           smile: Math.floor(exactSeats.smile),
           rainbow: Math.floor(exactSeats.rainbow),
           upsidedown: Math.floor(exactSeats.upsidedown),
           afd: Math.floor(exactSeats.afd),
         };
 
-        // Add full seats
-        for (let i = 0; i < fullSeats.smile; i++)
-          seatsContainer.innerHTML += `<div class="seat">😊</div>`;
-        for (let i = 0; i < fullSeats.rainbow; i++)
-          seatsContainer.innerHTML += `<div class="seat">😎</div>`;
-        for (let i = 0; i < fullSeats.upsidedown; i++)
-          seatsContainer.innerHTML += `<div class="seat">🙃</div>`;
-        for (let i = 0; i < fullSeats.afd; i++)
-          seatsContainer.innerHTML += `<div class="seat">💩</div>`;
-
-        // Distribute remaining seats based on highest decimal remainder
+        // Calculate remainders and how many seats still need to be allocated
         const remainders = {
-          smile: exactSeats.smile - fullSeats.smile,
-          rainbow: exactSeats.rainbow - fullSeats.rainbow,
-          upsidedown: exactSeats.upsidedown - fullSeats.upsidedown,
-          afd: exactSeats.afd - fullSeats.afd,
+          smile: exactSeats.smile - allocatedSeats.smile,
+          rainbow: exactSeats.rainbow - allocatedSeats.rainbow,
+          upsidedown: exactSeats.upsidedown - allocatedSeats.upsidedown,
+          afd: exactSeats.afd - allocatedSeats.afd,
         };
 
-        const remainingSeats =
-          10 - Object.values(fullSeats).reduce((a, b) => a + b, 0);
-        const sortedRemainders = Object.entries(remainders)
-          .sort(([, a], [, b]) => b - a)
-          .slice(0, remainingSeats);
+        const allocatedTotal = Object.values(allocatedSeats).reduce((a, b) => a + b, 0);
+        const seatsRemaining = TOTAL_SEATS - allocatedTotal;
 
-        sortedRemainders.forEach(([party]) => {
-          const emoji =
-            party === "smile"
-              ? "😊"
-              : party === "rainbow"
-              ? "😎"
-              : party === "upsidedown"
-              ? "🙃"
-              : "💩";
-          seatsContainer.innerHTML += `<div class="seat">${emoji}</div>`;
+        // Distribute remaining seats based on highest decimal remainder
+        const sortedParties = Object.entries(remainders)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, seatsRemaining)
+          .map(([party]) => party);
+
+        // Add the remaining seats to the allocated seats
+        sortedParties.forEach(party => {
+          allocatedSeats[party]++;
         });
 
-        // Update text
+        // Render seats
+        const partyEmojis = {
+          smile: "😊",
+          rainbow: "😎",
+          upsidedown: "🙃",
+          afd: "💩"
+        };
+
+        Object.entries(allocatedSeats).forEach(([party, seats]) => {
+          for (let i = 0; i < seats; i++) {
+            seatsContainer.innerHTML += `<div class="seat">${partyEmojis[party]}</div>`;
+          }
+        });
+
+        // Update text with final seat counts
         document.getElementById("resultText").innerHTML =
-          `😊: ${totalSmile} Stimmen - ${Math.round(
-            exactSeats.smile
-          )} Sitze<br>` +
-          `😎: ${totalRainbow} Stimmen - ${Math.round(
-            exactSeats.rainbow
-          )} Sitze<br>` +
-          `🙃: ${totalUpsidedown} Stimmen - ${Math.round(
-            exactSeats.upsidedown
-          )} Sitze<br>` +
-          `💩: ${totalAfD} Stimmen - ${Math.round(exactSeats.afd)} Sitze`;
+          `😊: ${totalSmile} Stimmen - ${allocatedSeats.smile} Sitze<br>` +
+          `😎: ${totalRainbow} Stimmen - ${allocatedSeats.rainbow} Sitze<br>` +
+          `🙃: ${totalUpsidedown} Stimmen - ${allocatedSeats.upsidedown} Sitze<br>` +
+          `💩: ${totalAfD} Stimmen - ${allocatedSeats.afd} Sitze`;
+
+        // Verify total seats (for debugging)
+        const finalTotal = Object.values(allocatedSeats).reduce((a, b) => a + b, 0);
+        console.assert(finalTotal === TOTAL_SEATS, `Expected ${TOTAL_SEATS} seats, got ${finalTotal}`);
       }
 
       // Initialize results
