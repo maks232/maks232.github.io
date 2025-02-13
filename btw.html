@@ -417,7 +417,7 @@
   fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
     .then(response => response.json())
     .then(data => {
-      document.getElementById("counter").innerText = "Visits: " + data.visit_count;
+      document.getElementById("visitor-count").innerText = "Visits: " + data.visit_count;
     })
     .catch(error => console.error("Error fetching counter:", error));
 </script>
