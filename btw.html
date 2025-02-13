@@ -510,10 +510,10 @@
 
         // Update text
         document.getElementById("resultText").innerHTML =
-          `😊: ${Math.round(exactSeats.smile)} Sitze<br>` +
-          `😎: ${Math.round(exactSeats.rainbow)} Sitze<br>` +
-          `🙃: ${Math.round(exactSeats.upsidedown)} Sitze<br>` +
-          `💩: ${Math.round(exactSeats.afd)} Sitze`;
+          `😊: ${totalSmile} Stimmen - ${Math.round(exactSeats.smile)} Sitze<br>` +
+          `😎: ${totalWainbow} Stimmen - ${Math.round(exactSeats.rainbow)} Sitze<br>` +
+          `🙃: ${totalUpsidedown} Stimmen - ${Math.round(exactSeats.upsidedown)} Sitze<br>` +
+          `💩: ${totalAfd} Stimmen - ${Math.round(exactSeats.afd)} Sitze`;
       }
 
       // Initialize results
