@@ -7,6 +7,7 @@
       Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
       .voter {
         width: 35px;
@@ -205,6 +206,43 @@
       .accordion-button:not(.collapsed) {
         box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
       }
+
+      /* Custom tooltip styles */
+      .tooltip-inner {
+        max-width: 400px;
+        padding: 1rem;
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: white;
+        color: #212529;
+        border: 1px solid rgba(0,0,0,.1);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      }
+
+      .tooltip.show {
+        opacity: 1;
+      }
+
+      .tooltip a {
+        color: #0d6efd;
+        text-decoration: none;
+      }
+
+      .tooltip a:hover {
+        text-decoration: underline;
+      }
+
+      /* Arrow styles */
+      .tooltip .tooltip-arrow::before {
+        border-bottom-color: rgba(0,0,0,.1);
+      }
+      .tooltip .tooltip-arrow::after {
+        content: "";
+        position: absolute;
+        border-color: transparent;
+        border-style: solid;
+      }
     </style>
     <meta name="description" content="Ein interaktiver Wähler-Simulator der zeigt, warum jede Stimme zählt. Verstehen Sie die Auswirkungen von Nichtwählern auf das demokratische System.">
     <meta property="og:title" content="Warum Du wählen solltest">
@@ -247,6 +285,11 @@
                   politische Entscheidungen ihr tägliches Leben direkt beeinflussen.
                   Sie zahlen Steuern, tragen zur Gesellschaft bei, doch eine
                   Wahlstimme bleibt ihnen versagt.
+                  <span data-bs-toggle="tooltip" data-bs-placement="top" 
+                        data-bs-html="true"
+                        title="In Deutschland leben derzeit mehr als 80 Millionen Menschen, aber bei der Bundestagswahl 2025 werden nur rund 60 Millionen Deutsche wahlberechtigt sein.<br><br><a href='https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Bevoelkerungsstand/_inhalt.html' target='_blank'>Quelle: Destatis (Bevölkerung) ↗</a><br><a href='https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/12/PD24_460_14.html' target='_blank'>Quelle: Destatis (Wahlberechtigte) ↗</a>">
+                    <i class="bi bi-info-circle ms-2" style="font-size: 1rem; color: #0d6efd;"></i>
+                  </span>
                   <br /><br /><strong>Nutze Dein Privileg.</strong>
                 </div>
               </div>
@@ -268,6 +311,11 @@
                   eine solche Summe in die Hand drücken würdest, hättest du doch
                   vermutlich auch das Bedürfnis, dich ab und zu zu erkundigen, wie
                   es denn so läuft.
+                  <span data-bs-toggle="tooltip" data-bs-placement="top" 
+                        data-bs-html="true"
+                        title="Der Bundeshaushalt beträgt derzeit knapp 500 Milliarden Euro. Bei rund 60 Millionen Wahlberechtigten sind das über 30.000€ pro Stimme für die Legislaturperiode.<br><br><a href='https://www.bundeshaushalt.de/DE/Bundeshaushalt-digital/bundeshaushalt-digital.html' target='_blank'>Quelle: bundeshaushalt.de ↗</a>">
+                    <i class="bi bi-info-circle ms-2" style="font-size: 1rem; color: #0d6efd;"></i>
+                  </span>
                   <br /><br /><strong>Du hast jetzt die Chance, dieses Budget ein wenig zu beeinflussen.</strong>
                 </div>
               </div>
@@ -538,6 +586,28 @@
 
       // Initialize results
       updateResults();
+    </script>
+
+    <script>
+      // Initialize tooltips with custom options
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => 
+        new bootstrap.Tooltip(tooltipTriggerEl, {
+          trigger: 'click hover focus', // Makes tooltip stay visible on hover
+          html: true,
+          animation: true,
+          placement: 'top',
+          container: 'body',
+          boundary: 'window'
+        })
+      );
+
+      // Close tooltip when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('[data-bs-toggle="tooltip"]')) {
+          tooltipList.forEach(tooltip => tooltip.hide());
+        }
+      });
     </script>
   </body>
 </html>
