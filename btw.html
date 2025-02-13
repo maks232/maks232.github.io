@@ -6,35 +6,8 @@
     <title>
       Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
     </title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script>
-      // Initialize all sections as collapsed when the page loads
-      document.addEventListener("DOMContentLoaded", function () {
-        document.body.classList.add("content-loaded");
-        document.querySelectorAll(".collapsible-section").forEach((section) => {
-          section.classList.add("collapsed");
-          const h3 = section.querySelector("h3");
-          h3.textContent = h3.textContent.replace("▼", "▶");
-        });
-      });
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        max-width: 800px;
-        margin: 50px auto;
-        font-family: Arial, sans-serif;
-      }
-
-      .voters-section,
-      .results-section {
-        text-align: center;
-        width: 100%;
-        margin: 20px 0;
-      }
-
       .voter {
         width: 35px;
         height: 35px;
@@ -146,7 +119,7 @@
         max-height: 0;
       }
 
-      @media (min-width: 640px) {
+      @media (min-width: 576px) {
         .voter {
           width: 40px;
           height: 40px;
@@ -170,258 +143,299 @@
       }
 
       body {
-        background-color: #f3f4f6;
-        background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
-        background-size: 10px 10px;
+        background-color: #f8f9fa;
+      }
+
+      .accordion-button:not(.collapsed) {
+        color: #0d6efd;
+        background-color: #f8f9fa;
+      }
+
+      .accordion-button:focus {
+        box-shadow: none;
+        border-color: rgba(0,0,0,.125);
+      }
+
+      /* Custom accordion styles */
+      .accordion-button {
+        font-size: 1.25rem;
+        font-weight: 600;
+        padding: 1.25rem;
+      }
+
+      .accordion-button:not(.collapsed) {
+        color: #0d6efd;
+        background-color: #f8f9fa;
+        font-weight: 700;
+      }
+
+      .accordion-button::after {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-size: 1.5rem;
+      }
+
+      .accordion-body {
+        font-size: 1.1rem;
+        padding: 1.25rem;
+        background-color: #fff;
+      }
+
+      .accordion-item {
+        border: 1px solid rgba(0,0,0,.125);
+        margin-bottom: 0.5rem;
+      }
+
+      .accordion-item:first-of-type {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+
+      .accordion-item:last-of-type {
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+
+      /* Hover effect */
+      .accordion-button:hover {
+        background-color: #e9ecef;
+      }
+
+      /* Active state */
+      .accordion-button:not(.collapsed) {
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
       }
     </style>
+    <meta name="description" content="Ein interaktiver Wähler-Simulator der zeigt, warum jede Stimme zählt. Verstehen Sie die Auswirkungen von Nichtwählern auf das demokratische System.">
+    <meta property="og:title" content="Warum Du wählen solltest">
+    <meta property="og:description" content="Ein interaktiver Wähler-Simulator der zeigt, warum jede Stimme zählt.">
+    <meta property="og:type" content="website">
   </head>
-  <body class="bg-gray-50">
-    <div class="container mx-auto px-4 py-4 sm:py-8 max-w-3xl">
-      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
-        <h2
-          class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center leading-tight"
-        >
-          Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen
-          willst
-        </h2>
+  <body>
+    <div class="container py-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4 fs-2 fw-bold">
+            Warum Du wählen solltest, auch wenn Du nicht weißt, wen Du wählen willst
+          </h2>
 
-        <div class="space-y-3 sm:space-y-4">
-          <div
-            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
-          >
-            <h3
-              onclick="toggleCollapse(this)"
-              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
-            >
-              ▼ Hohe Wahlbeteiligung bedeutet echte Demokratie.
-            </h3>
-            <div
-              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
-            >
-              Mehr Wähler ➡️ faire Entscheidungen<br />
-              Wenige Wähler ➡️ Mehr Macht für rechte Randgruppen
-              <br /><br /><b>Sei Fair und wähle.</b>
+          <div class="accordion" id="mainAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" aria-label="Öffne Sektion über Wahlbeteiligung">
+                  Hohe Wahlbeteiligung bedeutet echte Demokratie.
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#mainAccordion">
+                <div class="accordion-body">
+                  Mehr Wähler ➡️ faire Entscheidungen<br />
+                  Wenige Wähler ➡️ Mehr Macht für rechte Randgruppen
+                  <br /><br /><strong>Sei Fair und wähle.</strong>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div
-            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
-          >
-            <h3
-              onclick="toggleCollapse(this)"
-              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
-            >
-              ▼ 😊😊😊😒 1 von 4 darf noch nicht einmal wählen
-            </h3>
-            <div
-              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
-            >
-              Viele Menschen in Deutschland dürfen nicht mitentscheiden – obwohl
-              politische Entscheidungen ihr tägliches Leben direkt beeinflussen.
-              Sie zahlen Steuern, tragen zur Gesellschaft bei, doch eine
-              Wahlstimme bleibt ihnen versagt.
-              <br /><br /><b>Nutze Dein Privileg.</b>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  😊😊😒 1 von 4 darf noch nicht einmal wählen
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+                <div class="accordion-body">
+                  Viele Menschen in Deutschland dürfen nicht mitentscheiden – obwohl
+                  politische Entscheidungen ihr tägliches Leben direkt beeinflussen.
+                  Sie zahlen Steuern, tragen zur Gesellschaft bei, doch eine
+                  Wahlstimme bleibt ihnen versagt.
+                  <br /><br /><strong>Nutze Dein Privileg.</strong>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div
-            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
-          >
-            <h3
-              onclick="toggleCollapse(this)"
-              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
-            >
-              ▼ Deine Stimme ist über 8000€ im Jahr Wert
-            </h3>
-            <div
-              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
-            >
-              Deutschland verfügt über ein enormes Budget – und du trägst deinen
-              Teil dazu bei. Durch deine Einkäufe, dein Einkommen und deine
-              gesellschaftliche Teilhabe fließt Geld in dieses System.
-              Runtergebrochen auf deine Stimme sind das über 30.000 € für die
-              nächste Regierung. Wenn du einer Bekannten oder einem Bekannten
-              eine solche Summe in die Hand drücken würdest, hättest du doch
-              vermutlich auch das Bedürfnis, dich ab und zu zu erkundigen, wie
-              es denn so läuft.
-              <br /><br /><b
-                >Du hast jetzt die Chance, dieses Budget ein wenig zu
-                beeinflussen.</b
-              >
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Deine Stimme ist über 8000€ im Jahr Wert
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+                <div class="accordion-body">
+                  Deutschland verfügt über ein enormes Budget – und du trägst deinen
+                  Teil dazu bei. Durch deine Einkäufe, dein Einkommen und deine
+                  gesellschaftliche Teilhabe fließt Geld in dieses System.
+                  Runtergebrochen auf deine Stimme sind das über 30.000 € für die
+                  nächste Regierung. Wenn du einer Bekannten oder einem Bekannten
+                  eine solche Summe in die Hand drücken würdest, hättest du doch
+                  vermutlich auch das Bedürfnis, dich ab und zu zu erkundigen, wie
+                  es denn so läuft.
+                  <br /><br /><strong>Du hast jetzt die Chance, dieses Budget ein wenig zu beeinflussen.</strong>
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
-          >
-            <h3
-              onclick="toggleCollapse(this)"
-              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
-            >
-              ▼ Für unsere gemeinsame Zukunft
-            </h3>
-            <div
-              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
-            >
-              Wähle nicht aus negativen Gefühlen wie Angst, Egoismus oder
-              Missgunst, sondern aus positiven wie Mitgefühl, Verantwortung und
-              dem Wunsch nach Teilhabe. Wahlen sind zwar nur ein kleines, aber
-              sehr wichtiges Werkzeug, um unsere Gesellschaft zu gestalten. Und
-              wer will schon eine Gemeinschaft, die ihre Kraft vor allem aus dem
-              Negativen zieht?
-            </div>
-          </div>
-          <div
-            class="collapsible-section bg-gray-50 rounded-lg p-3 sm:p-4 hover:bg-gray-100 transition-colors"
-          >
-            <h3
-              onclick="toggleCollapse(this)"
-              class="text-lg sm:text-xl font-semibold text-gray-700 cursor-pointer select-none leading-tight"
-            >
-              ▼ Es ist nicht Weihnachten, ran ans Buffet!
-            </h3>
-            <div
-              class="content mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base"
-            >
-              Und was ist mit der Partei, die diese eine Sache falsch macht? Sie
-              macht wahrscheinlich trotzdem vieles andere richtig. Eine Wahl ist
-              kein Weihnachtsgeschenk, bei dem Du genau das bekommst, was Du Dir
-              wünschst. Sie ist eher wie eine Party, zu der jeder etwas zum
-              Buffet beisteuert. Du kannst Dich darüber beschweren, dass niemand
-              Dein Lieblingsgericht mitgebracht hat – oder Du suchst Dir einfach
-              etwas Leckeres aus.
 
-              <br /><br /><b
-                >Um im Bild des vorherigen Absatzes zu bleiben: Meide die
-                Gerichte der wütenden Köche – sie sind schwer bekömmlich.
-              </b>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Für unsere gemeinsame Zukunft
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+                <div class="accordion-body">
+                  Wähle nicht aus negativen Gefühlen wie Angst, Egoismus oder
+                  Missgunst, sondern aus positiven wie Mitgefühl, Verantwortung und
+                  dem Wunsch nach Teilhabe. Wahlen sind zwar nur ein kleines, aber
+                  sehr wichtiges Werkzeug, um unsere Gesellschaft zu gestalten. Und
+                  wer will schon eine Gemeinschaft, die ihre Kraft vor allem aus dem
+                  Negativen zieht?
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Es ist nicht Weihnachten, ran ans Buffet!
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+                <div class="accordion-body">
+                  Und was ist mit der Partei, die diese eine Sache falsch macht? Sie
+                  macht wahrscheinlich trotzdem vieles andere richtig. Eine Wahl ist
+                  kein Weihnachtsgeschenk, bei dem Du genau das bekommst, was Du Dir
+                  wünschst. Sie ist eher wie eine Party, zu der jeder etwas zum
+                  Buffet beisteuert. Du kannst Dich darüber beschweren, dass niemand
+                  Dein Lieblingsgericht mitgebracht hat – oder Du suchst Dir einfach
+                  etwas Leckeres aus.
+                  <br /><br /><strong>Um im Bild des vorherigen Absatzes zu bleiben: Meide die
+                  Gerichte der wütenden Köche – sie sind schwer bekömmlich.</strong>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-8">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
-          Wähler-Simulator
-        </h3>
-        <p
-          class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base"
-        >
-          Wenn die Hälfte der Wahlberechtigten nicht wählt, bedeutet das, dass
-          die Stimmen der Wähler doppelt so viel zählen – auch die derer, die Du
-          auf keinen Fall unterstützen würdest. <br /><br />
 
-          Stell Dir vor, es gibt 10 Wahlberechtigte: 5 wählen verschiedene
-          Parteien, aber nicht die 💩-Partei. Manche kennen sie auch als
-          sogenannte Häufchen-Partei. Eine Person wählt die 💩-Partei. Die
-          anderen 4 bleiben zu Hause, obwohl sie diese Partei niemals wählen
-          würden. <br /><br />
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h3 class="card-title mb-3">Wähler-Simulator</h3>
+          <p class="card-text mb-4">
+            Wenn die Hälfte der Wahlberechtigten nicht wählt, bedeutet das, dass
+            die Stimmen der Wähler doppelt so viel zählen – auch die derer, die Du
+            auf keinen Fall unterstützen würdest. <br /><br />
 
-          Da die Nichtwähler nicht gezählt werden, erhält die 💩-Partei 2 Sitze
-          statt nur 1. Doch schon wenn nur einer der vier Nichtwähler seine
-          Stimme abgibt, reduziert sich ihr Einfluss. Deine Stimme kann den
-          Unterschied machen! <br /><br />
+            Stell Dir vor, es gibt 10 Wahlberechtigte: 5 wählen verschiedene
+            Parteien, aber nicht die 💩-Partei. Manche kennen sie auch als
+            sogenannte Häufchen-Partei. Eine Person wählt die 💩-Partei. Die
+            anderen 4 bleiben zu Hause, obwohl sie diese Partei niemals wählen
+            würden. <br /><br />
 
-          Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die
-          Sitzverteilung ändert, wenn Nichtwähler ihre Stimme den demokratischen
-          Parteien geben würden.
-        </p>
+            Da die Nichtwähler nicht gezählt werden, erhält die 💩-Partei 2 Sitze
+            statt nur 1. Doch schon wenn nur einer der vier Nichtwähler seine
+            Stimme abgibt, reduziert sich ihr Einfluss. Deine Stimme kann den
+            Unterschied machen! <br /><br />
 
-        <div
-          id="votersContainer"
-          class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-6 sm:mb-8"
-        >
-          <!-- Fixed voters for each party -->
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer smile"
-            role="button"
-            tabindex="0"
-            aria-label="Democratic party voter 1"
-          >
-            😊
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer smile"
-            role="button"
-            tabindex="0"
-            aria-label="Democratic party voter 2"
-          >
-            😊
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
-            😎
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
-            😎
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer upsidedown">
-            🙃
-          </div>
-          <div class="voter text-3xl sm:text-4xl cursor-pointer brown">💩</div>
-          <!-- Toggleable non-voters -->
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-            role="button"
-            tabindex="0"
-            aria-label="Toggle non-voter participation"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
-          </div>
-          <div
-            class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
-            onclick="toggleVoter(this)"
-          >
-            🟩
+            Klicke auf die grünen Kästchen 🟩, um zu sehen, wie sich die
+            Sitzverteilung ändert, wenn Nichtwähler ihre Stimme den demokratischen
+            Parteien geben würden.
+          </p>
+
+          <div id="votersContainer" class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+            <div
+              class="voter fs-3 cursor-pointer smile"
+              role="button"
+              tabindex="0"
+              aria-label="Democratic party voter 1"
+            >
+              😊
+            </div>
+            <div
+              class="voter text-3xl sm:text-4xl cursor-pointer smile"
+              role="button"
+              tabindex="0"
+              aria-label="Democratic party voter 2"
+            >
+              😊
+            </div>
+            <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+              😎
+            </div>
+            <div class="voter text-3xl sm:text-4xl cursor-pointer rainbow">
+              😎
+            </div>
+            <div class="voter text-3xl sm:text-4xl cursor-pointer upsidedown">
+              🙃
+            </div>
+            <div class="voter text-3xl sm:text-4xl cursor-pointer brown">💩</div>
+            <div
+              class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+              onclick="toggleVoter(this)"
+              role="button"
+              tabindex="0"
+              aria-label="Toggle non-voter participation"
+            >
+              🟩
+            </div>
+            <div
+              class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+              onclick="toggleVoter(this)"
+            >
+              🟩
+            </div>
+            <div
+              class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+              onclick="toggleVoter(this)"
+            >
+              🟩
+            </div>
+            <div
+              class="voter text-3xl sm:text-4xl cursor-pointer nonvoter"
+              onclick="toggleVoter(this)"
+            >
+              🟩
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
-          Ergebnisse (10 Sitze)
-        </h2>
-        <div
-          id="seatsContainer"
-          class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
-        ></div>
-        <div
-          id="resultText"
-          class="text-gray-600 mb-4 sm:mb-6 flex flex-col items-center"
-        ></div>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Ergebnisse (10 Sitze)</h2>
+          <div id="seatsContainer" class="d-flex flex-wrap justify-content-center gap-2 mb-4"></div>
+          <div id="resultText" class="text-center"></div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm text-center">
+        <div class="card-body">
+          <p class="mb-0">
+            <span class="fw-semibold">Besucher:</span>
+            <span id="visitor-count" class="fw-bold">Loading...</span>
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 mt-4 text-center">
-      <p class="text-gray-600">
-        <span class="font-semibold">Besucher:</span>
-        <span id="visitor-count" class="text-gray-800 font-bold"
-          >Loading...</span
-        >
-      </p>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      fetch(
-        "https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          document.getElementById("visitor-count").innerText =
-            " " + data.visit_count;
+      fetch("https://1dga3qvb6i.execute-api.eu-north-1.amazonaws.com/prod/traffic")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
         })
-        .catch((error) => console.error("Error fetching counter:", error));
+        .then(data => {
+          if (data && data.visit_count) {
+            document.getElementById("visitor-count").innerText = " " + data.visit_count;
+          } else {
+            throw new Error('Invalid data format');
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching counter:", error);
+          document.getElementById("visitor-count").innerText = " --";
+        });
     </script>
 
     <script>
@@ -526,18 +540,6 @@
 
       // Initialize results
       updateResults();
-
-      function toggleCollapse(element) {
-        const section = element.parentElement;
-        section.classList.toggle("collapsed");
-
-        // Toggle arrow icon
-        if (section.classList.contains("collapsed")) {
-          element.textContent = element.textContent.replace("▼", "▶");
-        } else {
-          element.textContent = element.textContent.replace("▶", "▼");
-        }
-      }
     </script>
   </body>
 </html>
