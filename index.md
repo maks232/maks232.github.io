@@ -4,6 +4,17 @@
 * * *
 
 ## 👨‍💻 Job Experience
+**Senior Consultant/Developer** @ [IAV](https://iav.com/) (since Nov 2021)  
+Software Development mostly in Reporting/BI and Planning Software for a variety of customers
+* Python
+  * Jupyter Notebook
+  * Matplotlib
+  * Pandas 
+* TypeScript
+* Javascript
+  * SAPUI5
+* Requirements Engineering
+
 **Software Engineer** @ [IAV](https://iav.com/) (Nov 2018 - Oct 2020)  
 HMI/UI-Developer for On Screen Keyboard in car infotainment system
 * EB Guide  
